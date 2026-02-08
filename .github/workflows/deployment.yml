@@ -6,42 +6,26 @@ jobs:
         steps:
             - name: Get code
               uses: actions/checkout@v3
-            - name: Install NodeJS
-              uses: actions/setup-node@v3
-              with:
-                node-version: 22
             - name: Install dependencies
               run: npm ci
             - name: Run lint
               run: npm run lint
-            - name: lint
-              run: echo "lint..."
     test:
         needs: lint
         runs-on: ubuntu-latest
         steps:
             - name: Get code
               uses: actions/checkout@v3
-            - name: Install NodeJS
-              uses: actions/setup-node@v3
-              with:
-                node-version: 22
             - name: Install dependencies
               run: npm ci
             - name: Run tests
-              run: npm test
-            - name: test
-              run: echo "testing"                
+              run: npm run test
     deploy:
       needs: test
       runs-on: ubuntu-latest
       steps:
         - name: Get code
           uses: actions/checkout@v3
-        - name: Install NodeJS
-          uses: actions/setup-node@v3
-          with:
-            node-version: 22
         - name: Install dependencies
           run: npm ci
         - name: Build project
